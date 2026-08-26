@@ -1,0 +1,63 @@
+name: build
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        include:
+          - platform: x64
+            rid: win-x64
+          - platform: ARM64
+            rid: win-arm64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Build
+        shell: pwsh
+        run: |
+          dotnet build src\ZedRecentProjects\ZedRecentProjects.csproj `
+            -c Release `
+            -p:Platform=${{ matrix.platform }} `
+            -r ${{ matrix.rid }}
+
+      - name: Stage plugin folder
+        shell: pwsh
+        run: |
+          $outDir = "src/ZedRecentProjects/bin/${{ matrix.platform }}/Release/net9.0-windows10.0.26100.0/${{ matrix.rid }}"
+          if (-not (Test-Path "$outDir/plugin.json")) {
+            throw "plugin.json not found in $outDir"
+          }
+          $stage = "artifact/ZedRecentProjects"
+          New-Item -ItemType Directory -Force $stage | Out-Null
+          Copy-Item "$outDir/*" $stage -Recurse -Force
+
+      - name: Package
+        shell: pwsh
+        run: |
+          Compress-Archive -Path "artifact/ZedRecentProjects" -DestinationPath "ZedRecentProjects-${{ matrix.rid }}.zip"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin-${{ matrix.rid }}
+          path: ZedRecentProjects-${{ matrix.rid }}.zip
+
+      - name: Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ZedRecentProjects-${{ matrix.rid }}.zip
+          fail_on_unmatched_files: false
