@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ZedRecentProjects;
+namespace ZedWorkspaces;
 
 /// <summary>
 /// Self-contained fuzzy matcher (case-insensitive). No dependency on the Wox host or pinyin

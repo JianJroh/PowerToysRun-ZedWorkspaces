@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ZedRecentProjects\ZedRecentProjects.csproj" />
+    <ProjectReference Include="..\..\src\ZedWorkspaces\ZedWorkspaces.csproj" />
   </ItemGroup>
 
 </Project>

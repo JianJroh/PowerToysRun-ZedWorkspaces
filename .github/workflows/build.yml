@@ -28,7 +28,7 @@ jobs:
       - name: Build
         shell: pwsh
         run: |
-          dotnet build src\ZedRecentProjects\ZedRecentProjects.csproj `
+          dotnet build src\ZedWorkspaces\ZedWorkspaces.csproj `
             -c Release `
             -p:Platform=${{ matrix.platform }} `
             -r ${{ matrix.rid }}
@@ -36,30 +36,30 @@ jobs:
       - name: Stage plugin folder
         shell: pwsh
         run: |
-          $outDir = "src/ZedRecentProjects/bin/${{ matrix.platform }}/Release/net9.0-windows10.0.26100.0/${{ matrix.rid }}"
+          $outDir = "src/ZedWorkspaces/bin/${{ matrix.platform }}/Release/net9.0-windows10.0.26100.0/${{ matrix.rid }}"
           if (-not (Test-Path "$outDir/plugin.json")) {
             throw "plugin.json not found in $outDir"
           }
-          $stage = "artifact/ZedRecentProjects"
+          $stage = "artifact/ZedWorkspaces"
           New-Item -ItemType Directory -Force $stage | Out-Null
           Copy-Item "$outDir/*" $stage -Recurse -Force
 
       - name: Package
         shell: pwsh
         run: |
-          Compress-Archive -Path "artifact/ZedRecentProjects" -DestinationPath "ZedRecentProjects-${{ matrix.rid }}.zip"
+          Compress-Archive -Path "artifact/ZedWorkspaces" -DestinationPath "ZedWorkspaces-${{ matrix.rid }}.zip"
 
       - name: Upload artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: plugin-${{ matrix.rid }}
-          path: ZedRecentProjects-${{ matrix.rid }}.zip
+          path: ZedWorkspaces-${{ matrix.rid }}.zip
 
       - name: Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228 # v3.0.2
         with:
-          files: ZedRecentProjects-${{ matrix.rid }}.zip
+          files: ZedWorkspaces-${{ matrix.rid }}.zip
           fail_on_unmatched_files: false
 
       - name: Changelog

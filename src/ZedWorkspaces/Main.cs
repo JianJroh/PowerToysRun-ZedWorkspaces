@@ -7,10 +7,10 @@ using System.Windows.Input;
 using Microsoft.PowerToys.Settings.UI.Library;
 using Wox.Plugin;
 
-namespace ZedRecentProjects;
+namespace ZedWorkspaces;
 
 /// <summary>
-/// Main class of the "Zed Recent Projects" plugin.
+/// Main class of the "Zed Workspaces" plugin.
 /// </summary>
 public class Main : IPlugin, IContextMenu, ISettingProvider, IDisposable
 {
@@ -22,7 +22,7 @@ public class Main : IPlugin, IContextMenu, ISettingProvider, IDisposable
     /// <summary>
     /// Name of the plugin.
     /// </summary>
-    public string Name => "Zed Recent Projects";
+    public string Name => "Zed Workspaces";
 
     /// <summary>
     /// Description of the plugin.

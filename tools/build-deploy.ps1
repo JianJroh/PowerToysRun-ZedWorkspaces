@@ -1,10 +1,10 @@
 <#
 .SYNOPSIS
-Builds and deploys the ZedRecentProjects plugin to PowerToys Run.
+Builds and deploys the ZedWorkspaces plugin to PowerToys Run.
 
 .DESCRIPTION
 Default behavior: builds Debug x64 and copies the whole output folder into
-%LOCALAPPDATA%\Microsoft\PowerToys\PowerToys Run\Plugins\ZedRecentProjects\,
+%LOCALAPPDATA%\Microsoft\PowerToys\PowerToys Run\Plugins\ZedWorkspaces\,
 then reminds you to fully restart PowerToys.
 
 With -Link it creates a directory junction from the plugins folder to the build
@@ -41,11 +41,11 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $repoRoot    = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
-$project     = Join-Path $repoRoot 'src\ZedRecentProjects\ZedRecentProjects.csproj'
+$project     = Join-Path $repoRoot 'src\ZedWorkspaces\ZedWorkspaces.csproj'
 $rid         = 'win-' + $Platform.ToLowerInvariant()
-$outputDir   = Join-Path $repoRoot "src\ZedRecentProjects\bin\$Platform\$Configuration\net9.0-windows10.0.26100.0\$rid"
+$outputDir   = Join-Path $repoRoot "src\ZedWorkspaces\bin\$Platform\$Configuration\net9.0-windows10.0.26100.0\$rid"
 $pluginsRoot = Join-Path $env:LOCALAPPDATA 'Microsoft\PowerToys\PowerToys Run\Plugins'
-$targetDir   = Join-Path $pluginsRoot 'ZedRecentProjects'
+$targetDir   = Join-Path $pluginsRoot 'ZedWorkspaces'
 
 function Get-IsReparsePoint {
     param([string]$Path)

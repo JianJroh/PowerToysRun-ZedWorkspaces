@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using Microsoft.Data.Sqlite;
 
-namespace ZedRecentProjects;
+namespace ZedWorkspaces;
 
 /// <summary>
 /// Reads the recent project list from Zed's SQLite workspace database.

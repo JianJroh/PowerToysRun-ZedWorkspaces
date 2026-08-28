@@ -1,4 +1,4 @@
-namespace ZedRecentProjects;
+namespace ZedWorkspaces;
 
 /// <summary>
 /// A single recent project loaded from Zed's workspace database.

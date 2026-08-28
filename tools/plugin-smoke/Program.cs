@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.PowerToys.Settings.UI.Library;
 using Wox.Plugin;
-using ZedRecentProjects;
+using ZedWorkspaces;
 
 // The real PowerToys host resolves plugins' helper assemblies (e.g. Testably.Abstractions)
 // from its own install directory. Mirror that here so Query() can run outside the host.
@@ -55,7 +55,7 @@ foreach (var p in projects)
 Console.WriteLine("\n== TextMatcher checks ==");
 Check("vibe", "vibe-quota");
 Check("vibe", "D:\\Dev\\OSS\\My\\vibe-usage");
-Check("zed", "ZedRecentProjects");
+Check("zed", "ZedWorkspaces");
 Check("resume", "D:\\Work\\Resume\\2026\\RESUME.md");
 Check("nosuch", "vibe-quota");
 Check("", "anything");

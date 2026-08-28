@@ -1,6 +1,6 @@
 using System;
 
-namespace ZedRecentProjects;
+namespace ZedWorkspaces;
 
 /// <summary>
 /// Formats an UTC timestamp as a compact relative time string.

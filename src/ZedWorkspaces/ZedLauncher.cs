@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
-namespace ZedRecentProjects;
+namespace ZedWorkspaces;
 
 /// <summary>
 /// Launches projects in the Zed editor via its CLI.

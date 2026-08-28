@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ManagedCommon;
 using Wox.Plugin;
 
-namespace ZedRecentProjects;
+namespace ZedWorkspaces;
 
 /// <summary>
 /// Minimal host stub so the plugin can be exercised outside PowerToys.
